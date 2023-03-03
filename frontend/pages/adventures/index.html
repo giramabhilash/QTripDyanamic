@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,24 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QTrip Adventures</title>
     <link rel="stylesheet" href="../../css/styles.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=OT9YCsncuZVVklOE0Rmfbk3v8TQwf2zAKtqG3rbRl5S3SR6tw29V6AJj8jXLBeJkXl1vzv5XtkOdWYjONFvi5L6SrM7nvJOjqDI86pPCgiSHElx3uSMZWKJZGA_cmnbD" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9nYXVyYXYtcXRyaXBkeW5hbWljLm5ldGxpZnkuYXBwL3BhZ2VzL2FkdmVudHVyZXMvP2NpdHk9YmVuZ2FsdXJ1"/></head>
 
 <body>
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light ps-3">
         <a class="navbar-brand" href="../../">QTrip</a>
-        <div id="city-name"></div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav d-flex justify-content-end w-100">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../../">Home</a>
+                    <a class="nav-link" href="../../">Home</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./reservations/">Reservations</a>
@@ -77,9 +73,11 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Section to display all selected categories  -->
                 <div class="mt-2" id="category-section">
-                    <div class="d-flex align-items-center" id="category-list"></div>
+                    <div class="d-flex align-items-center" id="category-list">
+                    </div>
                 </div>
             </div>
             <!-- Display Adventures cards -->
@@ -90,11 +88,13 @@
     <footer>
         <div class="container">© QTrip 2020</div>
     </footer>
-
+    
     <!-- Bootstrap script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+    ></script>
 
     <script type="module">
         import {
@@ -120,12 +120,18 @@
                 ? getFiltersFromLocalStorage()
                 : { duration: "", category: [] };
 
-
+        console.log(filters);
+        
         //entry point (executed when DOM is loaded)
         (async function () {
 
-            //Fetches the City from URL query param (here : window.location.search is an in-built browser property that returns the query param from URL, example: http://localhost:8081/?city=bengaluru => window.location.search would return "?city=bengaluru")
-            let city = await getCityFromURL(window.location.search);
+            /* 
+             * Fetches the City from URL query param 
+             * window.location.search is an in-built browser property that 
+             * returns the query param from URL, 
+             * example: http://localhost:8081/?city=bengaluru => window.location.search would return "?city=bengaluru"
+             */
+            let city = getCityFromURL(window.location.search);
 
             //Fetches the adventures for the particular city
             adventures = await fetchAdventures(city);
@@ -146,14 +152,31 @@
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to show the selected duration filter. Use the provided input event
             // 2. Invoke saveFiltersToLocalStorage here
-
+            document.getElementById("data").textContent = "";
+             let duration=event.target.value;
+             //console.log(duration);
+             filters["duration"]=duration;
+             //generateFilterPillsAndUpdateDOM(filters);
+             //console.log(filters);
+            let filteredAdventures = filterFunction(adventures, filters);
+            addAdventureToDOM(filteredAdventures);
+            saveFiltersToLocalStorage(filters);
+             
         }
 
         //executed when clear button is clicked on duration filter dropdown
         function clearDuration(event) {
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to clear the Duration filter. Refer clearCategory() below
+            document.getElementById("data").textContent = "";
+            document.getElementById("duration-select").selectedIndex= 0;
+              filters["duration"]="";
+              //console.log(filters,"abc");
+              let filteredAdventures = filterFunction(adventures, filters);
+              addAdventureToDOM(filteredAdventures);
+
             // 2. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters);
 
         }
 
@@ -177,6 +200,7 @@
 
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters);
         }
 
         //executed when clear button is clicked on category filter dropdown
@@ -185,11 +209,13 @@
             document.getElementById("category-list").textContent = "";
 
             filters["category"] = [];
+        
             let filteredAdventures = filterFunction(adventures, filters);
             addAdventureToDOM(filteredAdventures);
 
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters);
         }
 
         //helper function
