@@ -8,6 +8,13 @@ async function init() {
   cities.forEach((key) => {
     addCityToDOM(key.id, key.city, key.description, key.image);
   });
+
+  //Updates the DOM with the cities
+  // if (cities) {
+  //   cities.forEach((key) => {
+  //     addCityToDOM(key.id, key.city, key.description, key.image);
+  //   });
+  // }
 }
 
 //Implementation of fetch call
@@ -25,6 +32,7 @@ async function fetchCities() {
 catch(error){
     return null;
   }
+
 }
 
 //Implementation of DOM manipulation to add cities

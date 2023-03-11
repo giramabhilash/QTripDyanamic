@@ -1,3 +1,4 @@
+
 import config from "../conf/index.js";
 
 //Implementation to extract city from query params
@@ -8,6 +9,7 @@ function getCityFromURL(search) {
   let params = new URLSearchParams(search);
   console.log(params.get("city"));
   return params.get("city");
+
 }
 
 //Implementation of fetch call with a paramterized input based on city
@@ -55,6 +57,7 @@ function addAdventureToDOM(adventures) {
                     </a>`;
     document.getElementById("data").append(elem);
   });
+
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
@@ -65,6 +68,10 @@ function filterByDuration(list, low, high) {
 }
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
 
+
+
+
+//Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
 function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
@@ -107,6 +114,9 @@ function filterFunction(list, filters) {
     filteredlist = filterByCategory(filteredlist, filters.category);
   }
   return filteredlist;
+
+  // Place holder for functionality to work in the Stubs
+  return list;
 }
 
 //Implementation of localStorage API to save filters to local storage. This should get called everytime an onChange() happens in either of filter dropdowns
@@ -128,8 +138,15 @@ function getFiltersFromLocalStorage(filters) {
     return JSON.parse(filtersString)
   }
   return null;
- 
 }
+// function getFiltersFromLocalStorage() {
+//   // TODO: MODULE_FILTERS
+//   // 1. Get the filters from localStorage and return String read as an object
+
+
+//   // Place holder for functionality to work in the Stubs
+//   return null;
+// }
 
 //Implementation of DOM manipulation to add the following filters to DOM :
 // 1. Update duration filter with correct value
@@ -146,6 +163,9 @@ function generateFilterPillsAndUpdateDOM(filters) {
     pillElem.innerHTML = `<div>${category}</div>`;
     document.getElementById("category-list").appendChild(pillElem);
   });
+
+  // TODO: MODULE_FILTERS
+  // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
 
 }
 export {
