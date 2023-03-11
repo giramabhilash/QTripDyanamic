@@ -18,7 +18,7 @@ async function fetchAdventureDetails(adventureId) {
       config.backendEndpoint + `/adventures/detail?adventure=${adventureId}`
     );
     const data = result.json();
-    return data;
+    console.log(data);
   } catch (error) {
     // Place holder for functionality to work in the Stubs
     return null;
