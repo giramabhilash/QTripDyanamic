@@ -4,26 +4,25 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
-  console.log(search)
-      let params = new URLSearchParams(search);
-      console.log(params.get('city'))
-     return params.get('city')
-
+  console.log(search);
+  let params = new URLSearchParams(search);
+  console.log(params.get("city"));
+  return params.get("city");
 }
 
 //Implementation of fetch call with a paramterized input based on city
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
- 
-  try{
-    const data= await fetch(config.backendEndpoint+`/adventures/?city=${city}`);
-   return await data.json();
-    
-   }
-  catch{
-    return null;
 
+  try {
+    const res = await fetch(
+      config.backendEndpoint + `/adventures/?city=${city}`
+    );
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    return null;
   }
 }
 
@@ -31,84 +30,53 @@ async function fetchAdventures(city) {
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
-  
-  for(let i=0;i<adventures.length;i++)
-  {
-    var div=document.createElement("div");
-    div.setAttribute("class","col-12 col-sm-6 col-lg-3 mb-3");
-    var a=document.createElement("a");
-    a.setAttribute("id",`${adventures[i].id}`);
-    a.href=`detail/?adventure=${adventures[i].id}`;
-    var div1=document.createElement("div");
-    div1.setAttribute("class","card activity-card");
-    var img=document.createElement("img");
-    img.src=adventures[i].image;
-    var div2=document.createElement("div");
-    var cat=document.createElement("div");
-    cat.setAttribute("class","category-banner");
-    cat.innerText=adventures[i].category;
-    div2.setAttribute("class","card-body col-md-12 mt-2");
-    var div3=document.createElement("div");
-    div3.setAttribute("class","d-flex justify-content-between");
-    var p1=document.createElement("p");
-    p1.innerText=adventures[i].name;
-    var p2=document.createElement("p");
-    p2.innerText="₹"+adventures[i].costPerHead;
-    var div4=document.createElement("div");
-    div4.setAttribute("class","d-flex justify-content-between");
-    var p3=document.createElement("p");
-    p3.innerText="Duration";
-    var p4=document.createElement("p");
-    p4.innerText=adventures[i].duration+" Hours";
-    div4.append(p3);
-    div4.append(p4);
-
-    div3.append(p1);
-    div3.append(p2);
-    div2.append(div3);
-    div2.append(div4);
-    div1.append(img);
-    div1.append(cat);
-    div1.append(div2);
-    a.append(div1);
-    div.append(a);
-    document.getElementById("data").append(div);
-
-  }
-  
-  
-
+  adventures.forEach((key) => {
+    const elem = document.createElement("div");
+    elem.className = "col-6 col-lg-3 mb-4 position-relative";
+    elem.innerHTML = `
+                    <a href="detail/?adventure=${key.id}" id=${key.id}>
+                      <div class="category-banner">${key.category}</div>
+                      <div class="activity-card">
+                        <img 
+                          class"img-responsive"
+                          src=${key.image} 
+                        /> 
+                        <div class="activity-card-text text-md-center w-100 mt-3">
+                          <div class="d-block d-md-flex justify-content-between flex-wrap ps-3 pe-3">
+                            <h5 class="text-left">${key.name}</h5>
+                            <p>₹${key.costPerHead}</p>
+                          </div>
+                          <div class="d-block d-md-flex justify-content-between flex-wrap ps-3 pe-3">
+                            <h5 class="text-left">Duration</h5>
+                            <p>${key.duration} Hours</p>
+                          </div>
+                        </div>
+                      </div>
+                    </a>`;
+    document.getElementById("data").append(elem);
+  });
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on Duration and return filtered list
-  console.log(list);
-  console.log(low);
-  console.log(high);
-  let filteredList=list.filter(function(e){
-    return (e.duration>=low && e.duration<=high);
-  })
-  console.log(filteredList);
-  return filteredList;
-
+  return list.filter((key) => key.duration > low && key.duration <= high);
 }
-
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
+
 function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
 
-  let filteredList=[];
-  console.log(list);
-  list.filter(function (e) {
-    if(categoryList.includes(e.category))
-      filteredList.push(e);   
-      });
+  // let filteredList = [];
+  // console.log(list);
+  // list.filter(function (e) {
+  //   if (categoryList.includes(e.category)) filteredList.push(e);
+  // });
 
-      return filteredList;
-
+  // return filteredList;
+  return list.filter((key) => categoryList.includes(key.category));
 }
 
 // filters object looks like this filters = { duration: "", category: [] };
@@ -119,39 +87,34 @@ function filterByCategory(list, categoryList) {
 // 3. Filter by duration and category together
 
 function filterFunction(list, filters) {
-  
+  // TODO: MODULE_FILTERS
+  // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
+  // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
 
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
   // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
 
-  let filteredlist =[]
-  let arr=filters["duration"].split("-")
-
-  // TODO: MODULE_FILTERS
-  // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
-  // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
-if(filters["category"].length>0&&filters["duration"].length>0){
-
- filteredlist=filterByCategory(list,filters.category)
- filteredlist=filterByDuration(filteredlist,parseInt(arr[0]),parseInt(arr[1]))
-}else if(filters["category"].length>0){
-  filteredlist=filterByCategory(list,filters.category);
-}else if(filters["duration"].length>0){
- filteredlist=filterByDuration(list,parseInt(arr[0]),parseInt(arr[1]))
-}else{
-  return list;
-}
   // Place holder for functionality to work in the Stubs
- return filteredlist;
-  
+
+  let filteredlist = list;
+
+  if (null != filters.duration && filters.duration !== "") {
+    const [low, high] = filters.duration.split("-");
+    filteredlist = filterByDuration(list, parseInt(low), parseInt(high));
+  }
+  if (null != filters.category && filters.category.length !== 0) {
+    filteredlist = filterByCategory(filteredlist, filters.category);
+  }
+  return filteredlist;
 }
 
 //Implementation of localStorage API to save filters to local storage. This should get called everytime an onChange() happens in either of filter dropdowns
 function saveFiltersToLocalStorage(filters) {
   // TODO: MODULE_FILTERS
   // 1. Store the filters as a String to localStorage
-  window.localStorage.setItem("filters", JSON.stringify(filters));
+  localStorage.setItem("filters", JSON.stringify(filters));
+
   return true;
 }
 
@@ -159,11 +122,13 @@ function saveFiltersToLocalStorage(filters) {
 function getFiltersFromLocalStorage(filters) {
   // TODO: MODULE_FILTERS
   // 1. Get the filters from localStorage and return String read as an object
-  return JSON.parse(window.localStorage.getItem('filters'));
+   // Place holder for functionality to work in the Stubs
+  const filtersString = localStorage.getItem("filters") ;
+  if(null != filtersString){
+    return JSON.parse(filtersString)
+  }
   return null;
-
-  // Place holder for functionality to work in the Stubs
-  
+ 
 }
 
 //Implementation of DOM manipulation to add the following filters to DOM :
@@ -171,25 +136,16 @@ function getFiltersFromLocalStorage(filters) {
 // 2. Update the category pills on the DOM
 
 function generateFilterPillsAndUpdateDOM(filters) {
+  document.getElementById("category-list").textContent = "";
   // TODO: MODULE_FILTERS
   // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
-  
-   let categoryList=filters["category"];
-   let li=[];
-  for(let i=0;i<categoryList.length;i++)
-  {
-   // console.log(categoryList[i]);
-    li.push(categoryList[i]);
-  }
-  console.log(li);
-  for(let i=0;i<li.length;i++)
-  {
-    console.log(li[i]);
-    var div=document.createElement("div");
-    div.setAttribute("class","category-filter");
-    div.innerText=li[i];
-    document.getElementById("category-list").append(div);
-  }
+
+  filters.category.forEach((category) => {
+    let pillElem = document.createElement("div");
+    pillElem.className = "category-filter";
+    pillElem.innerHTML = `<div>${category}</div>`;
+    document.getElementById("category-list").appendChild(pillElem);
+  });
 
 }
 export {
