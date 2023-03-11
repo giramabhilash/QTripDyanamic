@@ -17,7 +17,7 @@ async function fetchAdventureDetails(adventureId) {
     const result = await fetch(
       config.backendEndpoint + `/adventures/detail?adventure=${adventureId}`
     );
-    const data = result.json();
+    const data = await npmresult.json();
     console.log(data);
     return data;
   } catch (error) {
@@ -47,38 +47,38 @@ function addBootstrapPhotoGallery(images) {
 //   // TODO: MODULE_ADVENTURE_DETAILS
 //   // 1. Add the bootstrap carousel to show the Adventure images
     
-//   document.getElementById("photo-gallery").innerHTML= `
-//   <div id="carouselExampleIndicators" class="carousel slide">
-//   <div class="carousel-indicators" id="carousel-indicators"></div>
-//   <div class="carousel-inner" id="carousel-inner"></div>
-//   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-//     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-//     <span class="visually-hidden">Previous</span>
-//   </button>
-//   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-//     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-//     <span class="visually-hidden">Next</span>
-//   </button>
-// </div> `;
+  document.getElementById("photo-gallery").innerHTML= `
+  <div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators" id="carousel-indicators"></div>
+  <div class="carousel-inner" id="carousel-inner"></div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> `;
 
-// images.forEach((image, imageIndex)=>{
-//   const carouselElem = document.createElement("div");
-//   const activeClass = imageIndex === 0 ? "active" : "";
-//    carouselElem.className = `carousel-item ${activeClass}`;
-//    carouselElem.innerHTML= `<img src=${image} alt=""  class = "activity-card-image pb-3 pb-md-0"> `;
-//    document.getElementById("carousel-inner").append(carouselElem);
+images.forEach((image, imageIndex)=>{
+  const carouselElem = document.createElement("div");
+  const activeClass = imageIndex === 0 ? "active" : "";
+   carouselElem.className = `carousel-item ${activeClass}`;
+   carouselElem.innerHTML= `<img src=${image} alt=""  class = "activity-card-image pb-3 pb-md-0"> `;
+   document.getElementById("carousel-inner").append(carouselElem);
 
-//    const indicators =`
-//    <button 
-//    type="button" 
-//    data-bs-target="#carouselExampleIndicators" 
-//    data-bs-slide-to="${imageIndex}" 
-//    ${imageIndex=== 0 ? 'class ="active"' : ""} 
-//    aria-current="true" 
-//    aria-label="Slide ${imageIndex+1}"></button>
-//    `;
-//    document.getElementById("carousel-indicators").innerHTML += indicators;
-// })
+   const indicators =`
+   <button 
+   type="button" 
+   data-bs-target="#carouselExampleIndicators" 
+   data-bs-slide-to="${imageIndex}" 
+   ${imageIndex=== 0 ? 'class ="active"' : ""} 
+   aria-current="true" 
+   aria-label="Slide ${imageIndex+1}"></button>
+   `;
+   document.getElementById("carousel-indicators").innerHTML += indicators;
+})
 
 }
 
