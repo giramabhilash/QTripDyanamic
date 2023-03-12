@@ -17,8 +17,8 @@ async function fetchAdventureDetails(adventureId) {
     const result = await fetch(
       config.backendEndpoint + `/adventures/detail?adventure=${adventureId}`
     );
-    const data = await npmresult.json();
-    console.log(data);
+    const data = await result.json();
+    //console.log(data);
     return data;
   } catch (error) {
     // Place holder for functionality to work in the Stubs
@@ -35,10 +35,10 @@ function addAdventureDetailsToDOM(adventure) {
   document.getElementById("adventure-content").innerHTML= adventure.content;
 
 
-  let img = document.querySelector("#photo-gallery")
-  adventure.images.forEach(image => {
-    img.innerHTML += `<img src=${image} alt=""  class = "activity-card-image"> `;
-  });
+  // let img = document.querySelector("#photo-gallery")
+  // adventure.images.forEach(image => {
+  //   img.innerHTML += `<img src=${image} alt=""  class = "activity-card-image"> `;
+  // });
 
 }
 

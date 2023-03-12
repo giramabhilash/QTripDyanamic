@@ -75,18 +75,9 @@ function filterByDuration(list, low, high) {
 function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
-
-  // let filteredList = [];
-  // console.log(list);
-  // list.filter(function (e) {
-  //   if (categoryList.includes(e.category)) filteredList.push(e);
-  // });
-
-  // return filteredList;
   return list.filter((key) => categoryList.includes(key.category));
 }
 
-// filters object looks like this filters = { duration: "", category: [] };
 
 //Implementation of combined filter function that covers the following cases :
 // 1. Filter by duration only
@@ -116,7 +107,6 @@ function filterFunction(list, filters) {
   return filteredlist;
 
   // Place holder for functionality to work in the Stubs
-  return list;
 }
 
 //Implementation of localStorage API to save filters to local storage. This should get called everytime an onChange() happens in either of filter dropdowns
@@ -139,15 +129,6 @@ function getFiltersFromLocalStorage(filters) {
   }
   return null;
 }
-// function getFiltersFromLocalStorage() {
-//   // TODO: MODULE_FILTERS
-//   // 1. Get the filters from localStorage and return String read as an object
-
-
-//   // Place holder for functionality to work in the Stubs
-//   return null;
-// }
-
 //Implementation of DOM manipulation to add the following filters to DOM :
 // 1. Update duration filter with correct value
 // 2. Update the category pills on the DOM
