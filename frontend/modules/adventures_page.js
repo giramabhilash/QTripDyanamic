@@ -16,8 +16,7 @@ function getCityFromURL(search) {
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
-  try {
+   try{
     const res = await fetch(
       config.backendEndpoint + `/adventures/?city=${city}`
     );
@@ -27,8 +26,6 @@ async function fetchAdventures(city) {
     return null;
   }
 }
-
-//Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
