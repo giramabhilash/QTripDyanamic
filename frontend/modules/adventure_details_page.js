@@ -35,10 +35,10 @@ function addAdventureDetailsToDOM(adventure) {
   document.getElementById("adventure-content").innerHTML= adventure.content;
 
 
-  let img = document.querySelector("#photo-gallery")
-  adventure.images.forEach(image => {
-    img.innerHTML += `<img src=${image} alt=""  class = "activity-card-image"> `;
-  });
+  // let img = document.querySelector("#photo-gallery")
+  // adventure.images.forEach(image => {
+  //   img.innerHTML += `<img src=${image} alt=""  class = "activity-card-image"> `;
+  // });
 
 }
 

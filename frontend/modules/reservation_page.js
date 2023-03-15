@@ -18,42 +18,7 @@ async function fetchReservations() {
 
 //Function to add reservations to the table. Also; in case of no reservations, display the no-reservation-banner, else hide it.
 function addReservationToTable(reservations) {
-  // TODO: MODULE_RESERVATIONS
-  // 1. Add the Reservations to the HTML DOM so that they show up in the table
-  //    let banner = document.getElementById("no-reservation-banner");
-  //    let parentTable =document.getElementById("reservation-table-parent");
-  //    let tableBody = document.getElementById("reservation-table");
-  
-  //  if(reservations.length){
-  //     banner.setAttribute("style", "display:none")
-  //     parentTable.setAttribute("style", "display:block")
-    
-  //   reservations.forEach(element => {
-  //     let date = new Date(element.date);
-  //     let bookingTime = new Date(element.time);
-
-  //     tableBody.innerHTML+=`
-  //     <tr>
-  //     <td>${element.id}</td>
-  //     <td>${element.name}</td>
-  //     <td>${element.adventureName}</td>
-  //     <td>${element.person}</td>
-  //     <td>${date.toLocaleDateString("en-IN")}</td>
-  //     <td>${element.price}</td>
-  //     <td>${bookingTime.toLocalString("en-IN",{day:"numeric",month:"long",year:"numeric"})}, ${bookingTime.toLocaleTimeString("en-IN")}</td>
-  //     <td><button class="reservation-visit-button" id="${element.id}">
-  //     <a href="../detail/?adventure=${element.adventure}">Visit Adventure</a>
-  //     </button>
-  //     </td>
-  //     </tr>`
-  //   });  
-  //  }
-  //  else{
-  //   banner.setAttribute("style", "display:block")
-  //     parentTable.setAttribute("style", "display:none")
-  //  }
-    // TODO: MODULE_RESERVATIONS
-    // 1. Add the Reservations to the HTML DOM so that they show up in the table
+ 
     console.log(reservations)
     let banner = document.getElementById("no-reservation-banner")
     //Conditionally render the no-reservation-banner and reservation-table-parent
